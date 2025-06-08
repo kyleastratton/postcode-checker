@@ -20,7 +20,10 @@ def get_draw_results():
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
 
-    driver = webdriver.Chrome(executable_path='/usr/bin/chromedriver', options=options)
+    from selenium.webdriver.chrome.service import Service
+
+        service = Service('/usr/bin/chromedriver')
+        driver = webdriver.Chrome(service=service, options=options)
 
     try:
         driver.get("https://pickmypostcode.com/login")

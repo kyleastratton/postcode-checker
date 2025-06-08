@@ -1,0 +1,31 @@
+name: Daily Pick My Postcode Check
+
+on:
+  schedule:
+    - cron: '0 9 * * *'  # Runs every day at 9:00 UTC (10AM UK time)
+  workflow_dispatch:     # Allows manual runs too
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install selenium
+
+      - name: Run script
+        run: python check_draws.py
+
+        env:
+          EMAIL: ${{ secrets.EMAIL }}
+          POSTCODE: ${{ secrets.POSTCODE }}
+          APP_PASS: ${{ secrets.APP_PASS }}
+          RECIPIENT: ${{ secrets.RECIPIENT }}

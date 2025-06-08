@@ -21,9 +21,8 @@ def get_draw_results():
     options.add_argument('--disable-dev-shm-usage')
 
     from selenium.webdriver.chrome.service import Service
-
-        service = Service('/usr/bin/chromedriver')
-        driver = webdriver.Chrome(service=service, options=options)
+    service = Service('/usr/bin/chromedriver')
+    driver = webdriver.Chrome(service=service, options=options)
 
     try:
         driver.get("https://pickmypostcode.com/login")

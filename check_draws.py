@@ -27,6 +27,9 @@ def get_draw_results():
     try:
         driver.get("https://pickmypostcode.com/login")
         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, 'email')))
+        with open("page_debug.html", "w", encoding="utf-8") as f:
+            f.write(driver.page_source)
+
 
         driver.find_element(By.NAME, 'email').send_keys(EMAIL)
         driver.find_element(By.NAME, 'postcode').send_keys(POSTCODE)
